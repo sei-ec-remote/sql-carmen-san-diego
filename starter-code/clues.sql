@@ -20,8 +20,9 @@ SELECT countrycode FROM countrylanguages WHERE language = 'Italian' AND percenta
  -- There are only two cities she could be flying to in the country. One is named the same as the country – that
  -- would be too obvious. We're following our gut on this one; find out what other city in that country she might
  --  be flying to.
-SELECT name FROM countries WHERE code = 'SMR';
-SELECT name FROM cities WHERE countrycode = 'SMR' AND NOT name = 'San Marino';
+SELECT name FROM cities WHERE countrycode = 'SMR' AND NOT name = (
+  SELECT name FROM countries WHERE code = 'SMR'
+);
 
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different
@@ -33,9 +34,9 @@ SELECT name, countrycode FROM cities WHERE name LIKE 'Serra%' AND NOT name = 'Se
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, and is headed towards
  -- the capital! Look up the country's capital, and get there pronto! Send us the name of where you're headed and we'll
  -- follow right behind you!
-SELECT capital FROM countries WHERE code = 'BRA';
-SELECT name FROM cities WHERE id = 211;
-
+SELECT name FROM cities WHERE id = (
+  SELECT capital FROM countries WHERE code = 'BRA'
+);
 
 -- Clue #7: She knows we're on to her – her taxi dropped her off at the international airport, and she beat us to
  -- the boarding gates. We have one chance to catch her, we just have to know where she's heading and beat her to the
