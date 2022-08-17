@@ -17,7 +17,7 @@ CREATE TABLE countries (
     code character(3) NOT NULL,
     name text NOT NULL,
     continent text NOT NULL,
-    region text NOT NULL,
+    region text NOT NULL,q
     surfacearea real NOT NULL,
     indepyear smallint,
     population integer NOT NULL,
