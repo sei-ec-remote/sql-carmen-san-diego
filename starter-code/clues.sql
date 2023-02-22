@@ -14,7 +14,7 @@ SELECT language FROM countrylanguages WHERE countrycode = 'VAT';
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on
 -- to a different country, a country where people speak only the language she was learning. Find out which
 --  nearby country speaks nothing but that language.
-
+SELECT countrycode FROM countrylanguages WHERE language = 'Italian' AND percentage = 100;
 
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time.
