@@ -54,4 +54,4 @@ SELECT name FROM cities WHERE id = 211;
 
 
 
--- She's in ____________________________!
+-- She's in Santa Monica, California, USA!
