@@ -2,6 +2,9 @@
 -- traveling through Southern Europe. She's most likely traveling someplace where she won't be noticed,
 -- so find the least populated country in Southern Europe, and we'll start looking for her there.
 
+-- SELECT countries, region, population FROM countries WHERE region = 'Southern Europe' ORDER BY population;
+SELECT name, continent, region, population FROM countries WHERE population = (
+SELECT min(population) FROM countries WHERE region LIKE 'Southern Europe');
 
 
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending language classes in
