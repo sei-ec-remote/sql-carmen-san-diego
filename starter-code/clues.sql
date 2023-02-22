@@ -8,7 +8,7 @@ SELECT min(population) FROM countries WHERE region LIKE 'Southern Europe');
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending language classes in
 -- this country's officially recognized language. Check our databases and find out what language is
 -- spoken in this country, so we can call in a translator to work with you.
-
+SELECT language FROM countrylanguages WHERE countrycode = 'VAT';
 
 
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on
