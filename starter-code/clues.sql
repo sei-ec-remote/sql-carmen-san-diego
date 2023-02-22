@@ -43,6 +43,9 @@
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, and is headed towards
  -- the capital! Look up the country's capital, and get there pronto! Send us the name of where you're headed and we'll
  -- follow right behind you!
+--  world=# SELECT code, name, continent, capital FROM countries WHERE code = 'BRA';
+--  world=# SELECT name, id, countrycode FROM cities WHERE id = '211';
+--  brasilia
 
 
 
@@ -58,10 +61,12 @@
 -- I need a little more sunshine with my slice of life.
 -- So I'm off to add one to the population I find
 -- In a city of ninety-one thousand and now, eighty five.
+-- world=# SELECT name, population FROM cities WHERE population > 91000 AND population < 91200;
+-- Santa monica has 91084
 
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and we'll be sure to meet her at the gates with bells on.
 
 
 
--- She's in ____________________________!
+-- She's in ___________santa monica_________________!
