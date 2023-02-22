@@ -15,7 +15,7 @@ SELECT language FROM countrylanguages WHERE countrycode = 'VAT';
 -- to a different country, a country where people speak only the language she was learning. Find out which
 --  nearby country speaks nothing but that language.
 SELECT countrycode FROM countrylanguages WHERE language = 'Italian' AND percentage = 100;
-SELECT name, continent, region FROM countries WHERE code = 'SMR'; -- Did this to see how close it was
+SELECT name, continent, region FROM countries WHERE code = 'SMR'; -- Did this to see the location
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time.
  -- There are only two cities she could be flying to in the country. One is named the same as the country – that
