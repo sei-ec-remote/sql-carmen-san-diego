@@ -16,7 +16,7 @@ CREATE TABLE cities (
 CREATE TABLE countries (
     code character(3) NOT NULL,
     name text NOT NULL,
-    continent text NOT NULL,
+    continent text NOT NULL,\d
     region text NOT NULL,
     surfacearea real NOT NULL,
     indepyear smallint,
