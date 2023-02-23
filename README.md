@@ -33,8 +33,8 @@ world=# \d
               List of relations
  Schema |      Name       | Type  |   Owner   
 --------+-----------------+-------+-----------
- public | city            | table | moonmayor
- public | country         | table | moonmayor
+ public | cities          | table | moonmayor
+ public | countries       | table | moonmayor
  public | countrylanguage | table | moonmayor
 ```
 
