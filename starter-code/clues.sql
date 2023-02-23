@@ -2,11 +2,29 @@
 -- traveling through Southern Europe. She's most likely traveling someplace where she won't be noticed,
 -- so find the least populated country in Southern Europe, and we'll start looking for her there.
 
+-- SELECT name, population FROM countries
+-- WHERE region = 'Southern Europe' ORDER BY population ASC LIMIT 1;
+
+-- world=# \i clues.sql
+--               name               | population 
+-- ---------------------------------+------------
+--  Holy See (Vatican Cities State) |       1000
+-- (1 row)
+
 
 
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending language classes in
 -- this country's officially recognized language. Check our databases and find out what language is
 -- spoken in this country, so we can call in a translator to work with you.
+
+-- SELECT Language FROM countrylanguages
+-- WHERE countrycode = 'VAT' AND isofficial = 'T';
+
+-- world=# \i clues.sql
+--  language 
+-- ----------
+--  Italian
+-- (1 row)
 
 
 
@@ -14,6 +32,9 @@
 -- to a different country, a country where people speak only the language she was learning. Find out which
 --  nearby country speaks nothing but that language.
 
+SELECT name FROM countries
+WHERE code IN (SELECT countrycode FROM countrylanguages
+WHERE language = 'Italian' AND isofficial = 'T')
 
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time.
