@@ -34,16 +34,13 @@
 
 -- SELECT name FROM countries
 -- WHERE code IN (SELECT countrycode FROM countrylanguages
--- WHERE language = 'Italian' AND isofficial = 'T')
+-- WHERE language = 'Italian' AND percentage = 100 );
 
 -- world=# \i clues.sql
---               name               
--- ---------------------------------
---  Italy
+--     name    
+-- ------------
 --  San Marino
---  Switzerland
---  Holy See (Vatican Cities State)
--- (4 rows)
+-- (1 row)
 
 
 
@@ -82,15 +79,16 @@
  -- the capital! Look up the country's capital, and get there pronto! Send us the name of where you're headed and we'll
  -- follow right behind you!
 
-SELECT cities.name FROM cities
-JOIN countries ON countries.capital = cities.id
-WHERE countrycode = 'BRA';
+-- SELECT cities.name FROM cities
+-- JOIN countries ON countries.capital = cities.id
+-- WHERE countrycode = 'BRA';
 
-world=# \i clues.sql
-   name   
-----------
- Bras�lia
-(1 row)
+-- world=# \i clues.sql
+--    name   
+-- ----------
+--  Bras�lia
+-- (1 row)
+
 
 
 -- Clue #7: She knows we're on to her – her taxi dropped her off at the international airport, and she beat us to
@@ -109,6 +107,14 @@ world=# \i clues.sql
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and we'll be sure to meet her at the gates with bells on.
 
+SELECT name FROM cities 
+WHERE population = 91085 - 1;
+
+world=# \i clues.sql
+     name     
+--------------
+ Santa Monica
+(1 row)
 
 
--- She's in ____________________________!
+-- She's in _________Santa Monica___________________!
