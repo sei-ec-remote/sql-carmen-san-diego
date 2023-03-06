@@ -1,6 +1,16 @@
 -- Clue #1: We recently got word that someone fitting Carmen Sandiego's description has been
 -- traveling through Southern Europe. She's most likely traveling someplace where she won't be noticed,
 -- so find the least populated country in Southern Europe, and we'll start looking for her there.
+world=# SELECT name, population
+FROM countries
+WHERE region = 'Southern Europe'
+ORDER BY population
+LIMIT 1;
+              name               | population 
+---------------------------------+------------
+ Holy See (Vatican Cities State) |       1000
+(1 row)
+
 
 
 
@@ -9,10 +19,33 @@
 -- spoken in this country, so we can call in a translator to work with you.
 
 
+world=# SELECT language
+FROM countrylanguages
+WHERE countrycode = 'VAT';
+ language 
+----------
+ Italian
+(1 row)
+
+
 
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on
 -- to a different country, a country where people speak only the language she was learning. Find out which
 --  nearby country speaks nothing but that language.
+
+HINT:  Perhaps you meant to reference the column "cl.language".
+world=# SELECT cl.language, c.name
+FROM countrylanguages cl
+JOIN countries c ON cl.countrycode = c.code
+WHERE cl.language = 'Italian'
+  AND c.code != 'VAT'
+  AND c.region = 'Southern Europe'
+  AND ARRAY[cl.language]::varchar[] = ARRAY['Italian']::varchar[];
+ language |    name    
+----------+------------
+ Italian  | Italy
+ Italian  | San Marino
+(2 rows)
 
 
 
@@ -21,17 +54,76 @@
  -- would be too obvious. We're following our gut on this one; find out what other city in that country she might
  --  be flying to.
 
+world=# SELECT name
+FROM cities
+WHERE countrycode = 'ITA'
+AND name != 'Italy'
+LIMIT 2;
 
+  name  
+--------
+ Roma
+ Milano
+(2 rows)
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different
 -- parts of the globe! She's headed to South America as we speak; go find a city whose name is like the one we were
 -- headed to, but doesn't end the same. Find out the city, and do another search for what country it's in. Hurry!
 
+SELECT name, countrycode
+FROM cities
+OR name LIKE 'Roma%'
+OR name LIKE 'Milan%'
 
+SELECT name, countrycode
+FROM cities
+WHERE name LIKE 'Mil%'
+OR name LIKE 'Ro%';
+world=# SELECT name, countrycode
+FROM cities
+WHERE name LIKE 'Mil%'
+OR name LIKE 'Ro%';
+         name          | countrycode 
+-----------------------+-------------
+ Rotterdam             | NLD
+ Rosario               | ARG
+ Rondon�polis          | BRA
+ Rotherham             | GBR
+ Rochdale              | GBR
+ Road Town             | VGB
+ Roseau                | DMA
+ Milagro               | ECU <<<<<
+ Roodepoort            | ZAF
+ Roxas                 | PHL
+ Rodriguez (Montalban) | PHL
+ Rohtak                | IND
+ Roma                  | ITA
+ Milano                | ITA
+ Rouen                 | FRA
+ Roubaix               | FRA
+ Rostock               | DEU
+ Rostov-na-Donu        | RUS
+ Milwaukee             | USA
+ Rochester             | USA
+ Rockford              | USA
+ Roanoke               | USA
+(22 rows)
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, and is headed towards
  -- the capital! Look up the country's capital, and get there pronto! Send us the name of where you're headed and we'll
  -- follow right behind you!
+
+world=# SELECT name AS capital
+FROM cities
+WHERE id = (
+  SELECT capital
+  FROM countries
+  WHERE code = 'ECU'
+);
+ capital 
+---------
+ Quito
+(1 row)
 
 
 
@@ -51,6 +143,18 @@
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and we'll be sure to meet her at the gates with bells on.
 
+SELECT name, countrycode
+FROM cities
+WHERE population BETWEEN 91083 AND 91084;
+world=# SELECT name, countrycode
+FROM cities
+WHERE population BETWEEN 91083 AND 91084;
+     name     | countrycode 
+--------------+-------------
+ Santa Monica | USA
+(1 row)
 
 
--- She's in ____________________________!
+
+
+-- She's in Santa Monica!
